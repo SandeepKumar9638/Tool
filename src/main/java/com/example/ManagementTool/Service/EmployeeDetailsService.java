@@ -49,7 +49,7 @@ public class EmployeeDetailsService {
 		StringBuilder name = new StringBuilder();
 		name.append(imageDirForDoctors);
 		name.append(employeeImage);
-		// name.append(".jfif");
+		 name.append(".jfif");
 		System.out.println(name);
 
 		Path imagePath = Paths.get(name.toString());

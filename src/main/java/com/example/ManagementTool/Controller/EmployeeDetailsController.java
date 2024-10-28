@@ -41,24 +41,23 @@ public class EmployeeDetailsController {
 
 	@GetMapping("/getEmployeeDetails")
 	public List<EmployeeDetails> getAllEmployeeDetails() {
-		EmployeeDetails emp =new EmployeeDetails();
+		EmployeeDetails emp = new EmployeeDetails();
 		emp.setSalary(0);
 		return managementToolService.getAllEmployeeDetails();
-		
-		
+
 	}
 
 	@GetMapping("/getEmployeeDetails/{employeeImage}")
 	public ResponseEntity<?> getEmployeeImageByName(@PathVariable String employeeImage) {
 		byte[] hi = managementToolService.getEmployeeImageByName(employeeImage);
-		return ResponseEntity.ok().contentType(MediaType.APPLICATION_PDF).body(hi);
-
+		// return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(hi);
+		return ResponseEntity.ok().body(hi);
 	}
 
 	@PutMapping("/updateEmployeeDetails/{id}")
-	public EmployeeDetails updateEmployeeDetails(@RequestBody EmployeeDetails managementTool,@PathVariable int id){
-		return managementToolService.updateEmployeeDetails(managementTool,id);
-		
+	public EmployeeDetails updateEmployeeDetails(@RequestBody EmployeeDetails managementTool, @PathVariable int id) {
+		return managementToolService.updateEmployeeDetails(managementTool, id);
+
 	}
 
 }

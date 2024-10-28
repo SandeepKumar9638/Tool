@@ -1,9 +1,11 @@
 package com.example.ManagementTool.Controller;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ManagementTool.Entity.Company;
 import com.example.ManagementTool.Service.CompanyService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 
 @RestController
 public class CompanyController {
 
 	@Autowired
 	CompanyService companyService;
+	
+	@GetMapping("/sa")
+	public String sample() {
+		return "Testing Secirity";
+	}
+	
+	@GetMapping("/csrf")
+	public CsrfToken getcsrf(HttpServletRequest httpRequest) {
+		return (CsrfToken) httpRequest.getAttribute("_csrf");
+	}
 
 	@PostMapping("/postCompany")
 	public Company postCompany(@RequestBody Company company) {
