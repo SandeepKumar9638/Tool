@@ -1,9 +1,10 @@
 package com.example.ManagementTool.Controller;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,13 +23,17 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class CompanyController {
+	
+    private static final Logger logger = LogManager.getLogger(CompanyController.class);
 
 	@Autowired
 	CompanyService companyService;
 	
 	@GetMapping("/sa")
 	public String sample() {
+		logger.info("testing security");
 		return "Testing Secirity";
+		
 	}
 	
 	@GetMapping("/csrf")
