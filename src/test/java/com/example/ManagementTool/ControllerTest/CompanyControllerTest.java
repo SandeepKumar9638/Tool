@@ -21,11 +21,17 @@ public class CompanyControllerTest {
 	@InjectMocks
 	CompanyController company = new CompanyController();
 
+	Company com = new Company();
+	
 	@Test
 	void postCompanyTest() {
-		Company com = new Company();
+		
 		Company postCompany = comService.postCompany(com);
-		//assertEquals(com.getMobileNo(), 12);
+	//	assertEquals(com.getMobileNo(), postCompany.getMobileNo());
+	}
+	
+	void getCompanyTest() {
+		
 	}
 
 }

@@ -1,19 +1,33 @@
-/*
- * package com.example.ManagementTool;
- * 
- * import org.springframework.context.annotation.Bean; import
- * org.springframework.context.annotation.Configuration;
- * 
- * import springfox.documentation.builders.PathSelectors; import
- * springfox.documentation.builders.RequestHandlerSelectors; import
- * springfox.documentation.spi.DocumentationType; import
- * springfox.documentation.spring.web.plugins.Docket;
- * 
- * @Configuration public class SwagerConfig {
- * 
- * @Bean public Docket makindDoc() { return new
- * Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any
- * ()) .paths(PathSelectors.any()).build();
- * 
- * } }
- */
+
+package com.example.ManagementTool;
+
+import org.springdoc.core.models.GroupedOpenApi;
+import org.springdoc.core.properties.SpringDocConfigProperties;
+import org.springdoc.core.properties.SwaggerUiConfigParameters;
+import org.springdoc.core.properties.SwaggerUiConfigProperties;
+import org.springdoc.core.providers.SpringWebProvider;
+import org.springdoc.webmvc.ui.SwaggerWelcomeWebMvc;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SwagerConfig {
+
+	@Bean
+	public GroupedOpenApi internalApi() {
+		return GroupedOpenApi.builder().group("internal").pathsToMatch("/**").build();
+	}
+
+	@Bean
+	public GroupedOpenApi externalApi() {
+		return GroupedOpenApi.builder().group("Entities").pathsToMatch("/dba-names").build();
+	}
+
+	public SwaggerWelcomeWebMvc customSwaggerWelcomeWebMvc(SwaggerUiConfigProperties swaggerUiConfigProperties,
+														SpringDocConfigProperties configProperties,
+														SwaggerUiConfigParameters configParameters,
+														SpringWebProvider springWebProvider) {
+		return new CustomSwaggerWelcomeWebMvc(swaggerUiConfigProperties, configProperties, configParameters, springWebProvider);
+	}
+	
+}
