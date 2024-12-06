@@ -28,6 +28,7 @@ public class CompanyServiceTest {
 
 	@InjectMocks
 	CompanyService companyService;// = new CompanyService();
+	
 	@Mock
 	Company company;
 
