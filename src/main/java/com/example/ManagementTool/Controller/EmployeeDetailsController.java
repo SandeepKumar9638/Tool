@@ -48,7 +48,7 @@ public class EmployeeDetailsController {
 	}
 
 	@GetMapping("/getEmployeeDetails/{employeeImage}")
-	public ResponseEntity<?> getEmployeeImageByName(@PathVariable String employeeImage) {
+	public ResponseEntity<?> getEmployeeImageByName(@PathVariable String employeeImage) throws IOException {
 		byte[] hi = managementToolService.getEmployeeImageByName(employeeImage);
 		// return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(hi);
 		return ResponseEntity.ok().body(hi);

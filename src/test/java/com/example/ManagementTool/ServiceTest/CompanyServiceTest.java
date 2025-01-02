@@ -56,6 +56,12 @@ public class CompanyServiceTest {
 		when(comapnyRepo.findAll()).thenReturn(asList);
 		List<Company> company2 = companyService.getCompany();
 		assertEquals(company.getComapnyName(), company2.get(0).getComapnyName());
+		System.out.println("hello ggetting company");
+	}
+	
+	@Test
+	public void getCompanyByIdTest() {
+		
 	}
 
 	@AfterAll

@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ManagementTool.Entity.EmployeeDetails;
@@ -35,7 +36,7 @@ public class EmployeeDetailsService {
 	private String imageDirForOthers;
 
 	public EmployeeDetails postingDetailsofEmployee(EmployeeDetails managementTool) {
-		//managementTool.setGeneratedDate(LocalDateTime.now());
+		// managementTool.setGeneratedDate(LocalDateTime.now());
 
 		return managementToolRepo.save(managementTool);
 
@@ -45,23 +46,19 @@ public class EmployeeDetailsService {
 		return managementToolRepo.findAll();
 	}
 
-	public byte[] getEmployeeImageByName(String employeeImage) {
+	@ExceptionHandler
+	public byte[] getEmployeeImageByName(String employeeImage) throws IOException {
 		StringBuilder name = new StringBuilder();
 		name.append(imageDirForDoctors);
 		name.append(employeeImage);
-		 name.append(".jfif");
+		name.append(".jfif");
 		System.out.println(name);
 
 		Path imagePath = Paths.get(name.toString());
 
-		try {
-			byte[] data = Files.readAllBytes(imagePath);
+		byte[] data = Files.readAllBytes(imagePath);
 
-			return data;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return data;
 
 	}
 
@@ -95,8 +92,7 @@ public class EmployeeDetailsService {
 	}
 
 	public EmployeeDetails updateEmployeeDetails(EmployeeDetails managementTool, int id) {
-		
-		 
+
 		return managementToolRepo.save(managementTool);
 	}
 
